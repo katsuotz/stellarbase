@@ -1,0 +1,52 @@
+.form-control {
+    display: block;
+    width: 100%;
+    padding: .5rem .75rem;
+    font-size: var(--font-size-md);
+    line-height: 1.5;
+    color: var(--color-text);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: .5rem;
+    transition: border-color 150ms var(--ease-animation),
+    box-shadow 150ms var(--ease-animation);
+    z-index: 1;
+    position: relative;
+}
+
+select.form-control {
+    padding: .5rem 2rem .5rem .75rem;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: var(--select-caret-light);
+    background-repeat: no-repeat;
+    background-position: right var(--space-12) center;
+    background-size: 16px;
+}
+
+/* Dark mode caret */
+@media (prefers-color-scheme: dark) {
+    select.form-control {
+        background-image: var(--select-caret-dark);
+    }
+}
+
+[data-color-scheme="dark"] select.form-control {
+    background-image: var(--select-caret-dark);
+}
+
+[data-color-scheme="light"] select.form-control {
+    background-image: var(--select-caret-light);
+}
+
+.form-control:focus {
+    border-color: var(--color-primary);
+    outline: var(--focus-outline);
+    z-index: 2;
+}
+
+.form-control:hover {
+    border-color: var(--color-primary-hover);
+}

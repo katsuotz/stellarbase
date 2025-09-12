@@ -33,4 +33,7 @@
 
     /* Animation */
     --ease-animation: cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* Spacing */
+    --spacing: .25rem;
 }

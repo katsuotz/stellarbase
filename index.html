@@ -34,6 +34,76 @@
     </div>
 </nav>
 
+<main class="main-content">
+    <div class="container">
+        <!-- Product Section -->
+        <section class="product-section">
+            <div class="product-grid">
+                <!-- Product Image -->
+                <div class="product-image-section">
+                    <div class="product-image-container">
+                        <img id="productImage" src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab" alt="" class="product-image">
+                    </div>
+                </div>
+
+                <!-- Product Details -->
+                <div class="product-details-section">
+                    <div class="product-header">
+                        <h1 id="productTitle" class="product-title">Premium Cotton T-Shirt</h1>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <span class="stars-filled" id="starsDisplay">★★★★★</span>
+                            </div>
+                            <span id="reviewCount" class="review-count">(0 reviews)</span>
+                        </div>
+                    </div>
+
+                    <!-- Price Section -->
+                    <div class="price-section">
+                        <div class="price-display">
+                            <span id="salePrice" class="current-price">$0.00</span>
+                            <span id="originalPrice" class="original-price hidden">$0.00</span>
+                        </div>
+                        <div id="stockStatus" class="stock-status">In Stock</div>
+                    </div>
+
+                    <!-- Variant Selector -->
+                    <div class="variant-section">
+                        <label for="variantSelect" class="form-label">Size:</label>
+                        <select id="variantSelect" class="form-control">
+                            <option value="">Select size</option>
+                        </select>
+                    </div>
+
+                    <!-- Quantity Selector -->
+                    <div class="quantity-section">
+                        <label class="form-label">Quantity:</label>
+                        <div class="quantity-controls">
+                            <button id="quantityMinus" class="quantity-btn btn btn--outline" type="button">−</button>
+                            <input id="quantityInput" type="number" value="1" min="1" class="quantity-input form-control" readonly>
+                            <button id="quantityPlus" class="quantity-btn btn btn--outline" type="button">+</button>
+                        </div>
+                        <div id="stockLimit" class="stock-limit hidden">Only <span id="maxStock">0</span> left in stock</div>
+                    </div>
+
+                    <!-- Add to Cart Button -->
+                    <div class="add-to-cart-section">
+                        <button id="addToCartBtn" class="btn btn--primary btn--lg btn--full-width" disabled>
+                            <span id="buttonText">Select a size</span>
+                        </button>
+                    </div>
+
+                    <!-- Product Description -->
+                    <div class="product-description">
+                        <h3>Description</h3>
+                        <p id="productDescription">Comfortable, high-quality cotton t-shirt perfect for everyday wear. Made from 100% organic cotton with a relaxed fit.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
 <script src="app.js"></script>
 </body>
 </html>
