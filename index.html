@@ -3,10 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stellarbase</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Stellarbase</title><link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/main.css">
 </head>
 <body>
+
+<!-- Header -->
+<header class="header">
+    <div class="container">
+        <div class="header-content">
+            <h1 class="logo">Stellarbase Store</h1>
+            <button class="cart-toggle btn btn--outline" id="cartToggle">
+                <span id="cartIcon">🛒</span>
+                Cart (<span id="cartCount">0</span>)
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- Breadcrumbs -->
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container">
+        <ol class="breadcrumb-list">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Products</a></li>
+            <li aria-current="page">Premium Cotton T-Shirt</li>
+        </ol>
+    </div>
+</nav>
+
 <script src="app.js"></script>
 </body>
 </html>
