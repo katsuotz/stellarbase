@@ -1,0 +1,33 @@
+.footer {
+    padding: 2rem 0;
+    font-size: 1rem;
+    color: #737373;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer-links a {
+    text-decoration: none;
+    margin: 0 0.25rem;
+}
+
+.footer-links span {
+    margin: 0 0.25rem;
+    color: #777c7c;
+}
+
+@media (max-width: 600px) {
+    .footer-content {
+        font-size: 0.9rem;
+        gap: 0.25rem;
+    }
+
+    .footer-links {
+        flex-wrap: wrap;
+    }
+}
