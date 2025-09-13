@@ -10,9 +10,11 @@ export class CartManager {
     }
     this.cart = []
     this.instanceId = Math.random().toString(36).substr(2, 9)
+    this.loadCartFromStorage()
     this.createCartSidebar()
     this.elements = this.getElements()
     this.bindEvents()
+    this.updateDisplay()
   }
 
   createCartSidebar() {
@@ -72,6 +74,26 @@ export class CartManager {
     }
   }
 
+  loadCartFromStorage() {
+    try {
+      const savedCart = localStorage.getItem('shopping-cart')
+      if (savedCart) {
+        this.cart = JSON.parse(savedCart)
+      }
+    } catch (error) {
+      console.error('Error loading cart from localStorage:', error)
+      this.cart = []
+    }
+  }
+
+  saveCartToStorage() {
+    try {
+      localStorage.setItem('shopping-cart', JSON.stringify(this.cart))
+    } catch (error) {
+      console.error('Error saving cart to localStorage:', error)
+    }
+  }
+
   bindEvents() {
     this.elements.cartToggle?.addEventListener('click', () => this.toggle())
     this.elements.closeCart?.addEventListener('click', () => this.toggle())
@@ -125,6 +147,7 @@ export class CartManager {
     }
 
     this.updateDisplay()
+    this.saveCartToStorage()
     this.toggle()
     return true
   }
@@ -133,6 +156,7 @@ export class CartManager {
     if (index >= 0 && index < this.cart.length) {
       this.cart.splice(index, 1)
       this.updateDisplay()
+      this.saveCartToStorage()
     }
   }
 
@@ -185,7 +209,7 @@ export class CartManager {
       }
     }
 
-    const total = this.cart.reduce((sum, item) => sum + item.totalPrice, 0)
+    const total = this.getTotal()
     if (this.elements.cartTotal) {
       this.elements.cartTotal.textContent = formatPrice(total)
     }
