@@ -16,10 +16,8 @@ export class RelatedProductsElement extends HTMLElement {
   createRelatedProductsSection() {
     this.innerHTML = `
       <section class="related-products">
-        <div class="container">
-          <h2>Related Products</h2>
-          <div class="related-grid" data-related-products></div>
-        </div>
+        <h2>Related Products</h2>
+        <div class="related-grid" data-related-products></div>
       </section>
     `
   }
