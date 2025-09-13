@@ -31,6 +31,7 @@ const elements = {
   cartTotal: document.getElementById('cartTotal'),
   checkoutBtn: document.getElementById('checkoutBtn'),
   relatedProducts: document.getElementById('relatedProducts'),
+  quantitySection: document.getElementById('quantitySection'),
 }
 
 const formatPrice = (price) => {
@@ -53,7 +54,12 @@ const renderProduct = () => {
   }
   elements.reviewCount.textContent = `(${selectedProduct?.reviews || 0} reviews)`
   elements.quantityInput.value = 1
+  elements.quantitySection.classList.add('hidden')
   renderRelatedProducts()
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  })
 }
 
 const renderPrice = () => {
@@ -71,6 +77,7 @@ const renderVariant = () => {
   selectedVariant = undefined
   elements.variantLabel.textContent = selectedProduct.variantLabel
   elements.variantSelect.innerHTML = `<option value="">Select ${selectedProduct.variantLabel.toLowerCase()}</option>`
+  elements.addToCartBtn.textContent = 'Add to Cart'
   elements.addToCartBtn.disabled = true
 
   selectedProduct?.variants.forEach((variant) => {
@@ -126,10 +133,19 @@ const handleVariantSelect = (e) => {
   } else {
     elements.stockLimit.classList.add('hidden')
   }
-  elements.addToCartBtn.disabled = false
   let qty = parseInt(elements.quantityInput.value)
   if (qty > stock) qty = stock
-  updateQuantityButton(qty)
+  updateQuantityButton(qty, stock)
+
+  if (selectedVariant?.price && stock) {
+    elements.addToCartBtn.textContent = 'Add to Cart'
+    elements.addToCartBtn.disabled = false
+    elements.quantitySection.classList.remove('hidden')
+  } else {
+    elements.addToCartBtn.textContent = 'Product is currently not for sale'
+    elements.addToCartBtn.disabled = true
+    elements.quantitySection.classList.add('hidden')
+  }
 }
 
 const handleReduceQuantity = () => {

@@ -132,21 +132,18 @@
       "image": "",
       "rating": 4.7,
       "reviews": 67,
-      "basePrice": 49.99,
       "isOnSale": false,
       "variantLabel": "Color",
       "variants": [
         {
           "id": "wallet-brown",
           "name": "Brown",
-          "price": 49.99,
           "stock": 20,
           "sku": "WLT-004-BRN"
         },
         {
           "id": "wallet-black",
           "name": "Black",
-          "price": 49.99,
           "stock": 10,
           "sku": "WLT-004-BLK"
         }
