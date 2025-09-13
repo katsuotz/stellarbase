@@ -82,6 +82,7 @@ export class ProductManager {
 
   selectProduct(id) {
     this.selectedProduct = this.products.find(e => e.id === id)
+    this.updateUrl(id)
     this.render()
   }
 
@@ -303,6 +304,18 @@ export class ProductManager {
       metaTag.setAttribute('content', content)
       document.head.appendChild(metaTag)
     }
+  }
+
+  getProductIdFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search)
+    const productId = urlParams.get('productId')
+    return productId ? parseInt(productId) : null
+  }
+
+  updateUrl(productId) {
+    const url = new URL(window.location)
+    url.searchParams.set('productId', productId)
+    window.history.pushState({ productId }, '', url)
   }
 
   addToCart() {

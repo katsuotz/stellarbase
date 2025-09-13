@@ -44,7 +44,8 @@ const initializeApp = async () => {
     productManager.setProducts(products)
 
     if (products.length) {
-      productManager.selectProduct(products[0].id)
+      const id = productManager.getProductIdFromUrl()
+      productManager.selectProduct(id || products[0].id)
     }
   } catch (error) {
     console.error('Failed to initialize app:', error)
