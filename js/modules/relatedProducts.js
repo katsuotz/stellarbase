@@ -1,30 +1,37 @@
 import { formatPrice } from '../utils/formatters.js'
 
-export class RelatedProductsManager {
-  constructor(container, selectors = {}) {
-    this.container = typeof container === 'string' ? document.querySelector(container) : container
-    this.selectors = {
-      relatedProducts: '[data-related-products]',
-      ...selectors
-    }
-    this.elements = this.getElements()
+export class RelatedProductsElement extends HTMLElement {
+  constructor() {
+    super()
     this.products = []
     this.onProductSelect = null
+  }
+
+  connectedCallback() {
+    this.createRelatedProductsSection()
+    this.elements = this.getElements()
     this.bindEvents()
   }
 
-  getElements() {
-    const findElement = (selector) => {
-      return this.container.querySelector(selector) || document.querySelector(selector)
-    }
+  createRelatedProductsSection() {
+    this.innerHTML = `
+      <section class="related-products">
+        <div class="container">
+          <h2>Related Products</h2>
+          <div class="related-grid" data-related-products></div>
+        </div>
+      </section>
+    `
+  }
 
+  getElements() {
     return {
-      relatedProducts: findElement(this.selectors.relatedProducts)
+      relatedProducts: this.querySelector('[data-related-products]')
     }
   }
 
   bindEvents() {
-    this.elements.relatedProducts?.addEventListener('click', (e) => {
+    this.addEventListener('click', (e) => {
       const relatedItem = e.target.closest('[data-product-id]')
       if (relatedItem) {
         const productId = parseInt(relatedItem.getAttribute('data-product-id'))
@@ -68,3 +75,5 @@ export class RelatedProductsManager {
       </div>`).join('')
   }
 }
+
+customElements.define('related-products', RelatedProductsElement)

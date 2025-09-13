@@ -1,61 +1,133 @@
 import { formatPrice } from "../utils/formatters.js";
 
-export class ProductManager {
-  constructor(container, cartManager, relatedProductsManager = null, selectors = {}) {
-    this.container = typeof container === 'string' ? document.querySelector(container) : container
-    this.selectors = {
-      productImage: '[data-product-image]',
-      productTitle: '[data-product-title]',
-      productDescription: '[data-product-description]',
-      ratingCount: '[data-rating-count]',
-      reviewCount: '[data-review-count]',
-      salePrice: '[data-sale-price]',
-      originalPrice: '[data-original-price]',
-      variantLabel: '[data-variant-label]',
-      variantSelect: '[data-variant-select]',
-      stockLimit: '[data-stock-limit]',
-      maxStock: '[data-max-stock]',
-      addToCartBtn: '[data-add-to-cart]',
-      breadcrumbProduct: '[data-breadcrumb-product]',
-      quantitySection: '[data-quantity-section]',
-      quantityInput: '[data-quantity-input]',
-      quantityMinus: '[data-quantity-minus]',
-      quantityPlus: '[data-quantity-plus]',
-      ...selectors
-    }
-    this.elements = this.getElements()
-    this.cartManager = cartManager
-    this.relatedProductsManager = relatedProductsManager
+export class ProductElement extends HTMLElement {
+  constructor() {
+    super()
+    this.cartElement = null
+    this.relatedProductsElement = null
     this.products = []
     this.selectedProduct = null
     this.selectedVariant = null
     this.instanceId = Math.random().toString(36).substr(2, 9)
+  }
+
+  connectedCallback() {
+    this.createProductSection()
+    this.elements = this.getElements()
     this.bindEvents()
   }
 
-  getElements() {
-    const findElement = (selector) => {
-      return this.container.querySelector(selector) || document.querySelector(selector)
-    }
+  createProductSection() {
+    this.innerHTML = `
+      <section class="product-section">
+        <div class="product-grid">
+          <!-- Product Image -->
+          <div class="product-image-section">
+            <div class="product-image-container">
+              <img data-product-image src="https://placehold.co/400x400?text=Loading..." alt=""
+                   class="product-image">
+            </div>
+          </div>
 
+          <!-- Product Details -->
+          <div class="product-details-section">
+            <div class="product-header">
+              <h1 data-product-title class="product-title">Loading...</h1>
+              <div class="product-rating">
+                <div class="stars">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                       aria-hidden="true" data-slot="icon">
+                    <path fill-rule="evenodd"
+                          d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z"
+                          clip-rule="evenodd"></path>
+                  </svg>
+                  <span data-rating-count class="rating-count"></span>
+                </div>
+                <span data-review-count class="review-count">(0 reviews)</span>
+              </div>
+            </div>
+
+            <!-- Price Section -->
+            <div class="price-section">
+              <div class="price-display">
+                <span data-sale-price class="current-price">$0.00</span>
+                <span data-original-price class="original-price hidden">$0.00</span>
+              </div>
+            </div>
+
+            <!-- Variant Selector -->
+            <div class="variant-section">
+              <label for="variantSelect" class="form-label" data-variant-label>Size:</label>
+              <select id="variantSelect" data-variant-select class="form-control">
+                <option value="">Select size</option>
+              </select>
+            </div>
+
+            <!-- Quantity Selector -->
+            <div class="quantity-section hidden" data-quantity-section>
+              <label class="form-label">Quantity:</label>
+              <div class="quantity-controls">
+                <button data-quantity-minus class="quantity-btn btn btn-outline" type="button" disabled>−
+                </button>
+                <input data-quantity-input type="number" value="1" min="1"
+                       class="quantity-input form-control" readonly>
+                <button data-quantity-plus class="quantity-btn btn btn-outline" type="button" disabled> +
+                </button>
+              </div>
+              <div data-stock-limit class="stock-limit hidden">Only <span data-max-stock>0</span> left in stock
+              </div>
+            </div>
+
+            <!-- Add to Cart Button -->
+            <div class="add-to-cart-section">
+              <button data-add-to-cart class="btn btn-primary btn-lg w-full" disabled>
+                Add to Cart
+              </button>
+            </div>
+
+            <!-- Product Description -->
+            <div class="product-description">
+              <h3>Description</h3>
+              <p data-product-description>-</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    `
+  }
+
+  setCartElement(cartElement) {
+    this.cartElement = cartElement
+  }
+
+  setRelatedProductsElement(relatedProductsElement) {
+    this.relatedProductsElement = relatedProductsElement
+    if (this.relatedProductsElement) {
+      this.relatedProductsElement.setOnProductSelect((productId) => {
+        this.selectProduct(productId)
+      })
+    }
+  }
+
+  getElements() {
     return {
-      productImage: findElement(this.selectors.productImage),
-      productTitle: findElement(this.selectors.productTitle),
-      productDescription: findElement(this.selectors.productDescription),
-      ratingCount: findElement(this.selectors.ratingCount),
-      reviewCount: findElement(this.selectors.reviewCount),
-      salePrice: findElement(this.selectors.salePrice),
-      originalPrice: findElement(this.selectors.originalPrice),
-      variantLabel: findElement(this.selectors.variantLabel),
-      variantSelect: findElement(this.selectors.variantSelect),
-      stockLimit: findElement(this.selectors.stockLimit),
-      maxStock: findElement(this.selectors.maxStock),
-      addToCartBtn: findElement(this.selectors.addToCartBtn),
-      breadcrumbProduct: findElement(this.selectors.breadcrumbProduct),
-      quantitySection: findElement(this.selectors.quantitySection),
-      quantityInput: findElement(this.selectors.quantityInput),
-      quantityMinus: findElement(this.selectors.quantityMinus),
-      quantityPlus: findElement(this.selectors.quantityPlus)
+      productImage: this.querySelector('[data-product-image]'),
+      productTitle: this.querySelector('[data-product-title]'),
+      productDescription: this.querySelector('[data-product-description]'),
+      ratingCount: this.querySelector('[data-rating-count]'),
+      reviewCount: this.querySelector('[data-review-count]'),
+      salePrice: this.querySelector('[data-sale-price]'),
+      originalPrice: this.querySelector('[data-original-price]'),
+      variantLabel: this.querySelector('[data-variant-label]'),
+      variantSelect: this.querySelector('[data-variant-select]'),
+      stockLimit: this.querySelector('[data-stock-limit]'),
+      maxStock: this.querySelector('[data-max-stock]'),
+      addToCartBtn: this.querySelector('[data-add-to-cart]'),
+      breadcrumbProduct: document.querySelector('[data-breadcrumb-product]'),
+      quantitySection: this.querySelector('[data-quantity-section]'),
+      quantityInput: this.querySelector('[data-quantity-input]'),
+      quantityMinus: this.querySelector('[data-quantity-minus]'),
+      quantityPlus: this.querySelector('[data-quantity-plus]')
     }
   }
 
@@ -65,18 +137,12 @@ export class ProductManager {
     
     this.elements.quantityMinus?.addEventListener('click', () => this.handleReduceQuantity())
     this.elements.quantityPlus?.addEventListener('click', () => this.handleAddQuantity())
-
-    if (this.relatedProductsManager) {
-      this.relatedProductsManager.setOnProductSelect((productId) => {
-        this.selectProduct(productId)
-      })
-    }
   }
 
   setProducts(products) {
     this.products = products
-    if (this.relatedProductsManager) {
-      this.relatedProductsManager.setProducts(products)
+    if (this.relatedProductsElement) {
+      this.relatedProductsElement.setProducts(products)
     }
   }
 
@@ -116,8 +182,8 @@ export class ProductManager {
     this.setQuantityValue(1)
     this.hideQuantity()
     
-    if (this.relatedProductsManager) {
-      this.relatedProductsManager.render(this.selectedProduct?.id)
+    if (this.relatedProductsElement) {
+      this.relatedProductsElement.render(this.selectedProduct?.id)
     }
     
     window.scrollTo({
@@ -320,9 +386,8 @@ export class ProductManager {
 
   addToCart() {
     const quantity = this.getQuantityValue()
-    const success = this.cartManager?.addItem(this.selectedProduct, this.selectedVariant, quantity)
-    if (success) {
-      console.log('Added to cart:', this.selectedProduct, this.selectedVariant)
-    }
+    this.cartElement?.addItem(this.selectedProduct, this.selectedVariant, quantity)
   }
 }
+
+customElements.define('product-detail', ProductElement)
