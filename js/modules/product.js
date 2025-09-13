@@ -1,3 +1,5 @@
+import { formatPrice } from "../utils/formatters.js";
+
 export class ProductManager {
   constructor(container, cartManager, relatedProductsManager = null, selectors = {}) {
     this.container = typeof container === 'string' ? document.querySelector(container) : container
@@ -126,13 +128,13 @@ export class ProductManager {
     if (!this.elements.salePrice) return
 
     if (this.selectedProduct.isOnSale) {
-      this.elements.salePrice.textContent = `$${this.selectedProduct?.salePrice || 0}`
+      this.elements.salePrice.textContent = `${formatPrice(this.selectedProduct?.salePrice)}`
       if (this.elements.originalPrice) {
-        this.elements.originalPrice.textContent = `$${this.selectedProduct?.basePrice || 0}`
+        this.elements.originalPrice.textContent = `${formatPrice(this.selectedProduct?.basePrice)}`
         this.elements.originalPrice.classList.remove('hidden')
       }
     } else {
-      this.elements.salePrice.textContent = `$${this.selectedProduct?.basePrice || 0}`
+      this.elements.salePrice.textContent = `${formatPrice(this.selectedProduct?.basePrice)}`
       if (this.elements.originalPrice) {
         this.elements.originalPrice.classList.add('hidden')
       }
@@ -176,15 +178,15 @@ export class ProductManager {
 
     if (this.selectedVariant.originalPrice) {
       if (this.elements.salePrice) {
-        this.elements.salePrice.textContent = `$${this.selectedVariant?.price || 0}`
+        this.elements.salePrice.textContent = `${formatPrice(this.selectedVariant?.price)}`
       }
       if (this.elements.originalPrice) {
-        this.elements.originalPrice.textContent = `$${this.selectedVariant?.originalPrice || 0}`
+        this.elements.originalPrice.textContent = `${formatPrice(this.selectedVariant?.originalPrice)}`
         this.elements.originalPrice.classList.remove('hidden')
       }
     } else {
       if (this.elements.salePrice) {
-        this.elements.salePrice.textContent = `$${this.selectedVariant?.price || 0}`
+        this.elements.salePrice.textContent = `${formatPrice(this.selectedVariant?.price)}`
       }
       if (this.elements.originalPrice) {
         this.elements.originalPrice.classList.add('hidden')
