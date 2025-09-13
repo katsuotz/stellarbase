@@ -6,4 +6,10 @@
 @import "header.css";
 @import "breadcrumb.css";
 @import "input.css";
+@import "card.css";
 @import "product.css";
+
+/* Main Content */
+.main-content {
+    padding: 2rem 0;
+}

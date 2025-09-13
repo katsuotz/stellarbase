@@ -1,6 +1,5 @@
 /* Product Section */
 .product-section {
-    margin-top: 2rem;
     margin-bottom: 2rem;
 }
 
@@ -155,4 +154,30 @@
 .stock-limit {
     font-size: var(--font-size-sm);
     font-weight: 500;
+}
+
+/* Related Products */
+.related-products {
+    margin-top: 2rem;
+}
+
+.related-products h2 {
+    margin-bottom: 1.5rem;
+    font-size: var(--font-size-2xl);
+    font-weight: 600;
+}
+
+.related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.25rem;
+}
+
+.related-item {
+    transition: transform 200ms var(--ease-animation);
+    cursor: pointer;
+}
+
+.related-item:hover {
+    transform: translateY(-4px);
 }
