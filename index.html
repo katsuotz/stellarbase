@@ -15,13 +15,13 @@
     <div class="container">
         <div class="header-content">
             <h1 class="logo">Stellarbase Store</h1>
-            <span role="button" class="cart-toggle" id="cartToggle">
+            <span role="button" class="cart-toggle" id="cartToggle" data-cart-toggle>
                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                    <circle cx="8" cy="21" r="1"/>
                    <circle cx="19" cy="21" r="1"/>
                    <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
-               <span class="cart-count" id="cartCount">0</span>
+               <span class="cart-count" id="cartCount" data-cart-count>0</span>
             </span>
         </div>
     </div>
@@ -33,7 +33,7 @@
         <ol class="breadcrumb-list">
             <li><a href="#">Home</a></li>
             <li><a href="#">Products</a></li>
-            <li aria-current="page"></li>
+            <li aria-current="page" data-breadcrumb-product></li>
         </ol>
     </div>
 </nav>
@@ -46,7 +46,7 @@
                 <!-- Product Image -->
                 <div class="product-image-section">
                     <div class="product-image-container">
-                        <img id="productImage" src="https://placehold.co/400x400?text=Loading..." alt=""
+                        <img id="productImage" data-product-image src="https://placehold.co/400x400?text=Loading..." alt=""
                              class="product-image">
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                 <!-- Product Details -->
                 <div class="product-details-section">
                     <div class="product-header">
-                        <h1 id="productTitle" class="product-title">Loading...</h1>
+                        <h1 id="productTitle" data-product-title class="product-title">Loading...</h1>
                         <div class="product-rating">
                             <div class="stars">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
@@ -63,46 +63,46 @@
                                           d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z"
                                           clip-rule="evenodd"></path>
                                 </svg>
-                                <span id="ratingCount" class="rating-count"></span>
+                                <span id="ratingCount" data-rating-count class="rating-count"></span>
                             </div>
-                            <span id="reviewCount" class="review-count">(0 reviews)</span>
+                            <span id="reviewCount" data-review-count class="review-count">(0 reviews)</span>
                         </div>
                     </div>
 
                     <!-- Price Section -->
                     <div class="price-section">
                         <div class="price-display">
-                            <span id="salePrice" class="current-price">$0.00</span>
-                            <span id="originalPrice" class="original-price hidden">$0.00</span>
+                            <span id="salePrice" data-sale-price class="current-price">$0.00</span>
+                            <span id="originalPrice" data-original-price class="original-price hidden">$0.00</span>
                         </div>
                     </div>
 
                     <!-- Variant Selector -->
                     <div class="variant-section">
-                        <label for="variantSelect" class="form-label" id="variantLabel">Size:</label>
-                        <select id="variantSelect" class="form-control">
+                        <label for="variantSelect" class="form-label" id="variantLabel" data-variant-label>Size:</label>
+                        <select id="variantSelect" data-variant-select class="form-control">
                             <option value="">Select size</option>
                         </select>
                     </div>
 
                     <!-- Quantity Selector -->
-                    <div class="quantity-section hidden" id="quantitySection">
+                    <div class="quantity-section hidden" id="quantitySection" data-quantity-section>
                         <label class="form-label">Quantity:</label>
                         <div class="quantity-controls">
-                            <button id="quantityMinus" class="quantity-btn btn btn-outline" type="button" disabled>−
+                            <button id="quantityMinus" data-quantity-minus class="quantity-btn btn btn-outline" type="button" disabled>−
                             </button>
-                            <input id="quantityInput" type="number" value="1" min="1"
+                            <input id="quantityInput" data-quantity-input type="number" value="1" min="1"
                                    class="quantity-input form-control" readonly>
-                            <button id="quantityPlus" class="quantity-btn btn btn-outline" type="button" disabled> +
+                            <button id="quantityPlus" data-quantity-plus class="quantity-btn btn btn-outline" type="button" disabled> +
                             </button>
                         </div>
-                        <div id="stockLimit" class="stock-limit hidden">Only <span id="maxStock">0</span> left in stock
+                        <div id="stockLimit" data-stock-limit class="stock-limit hidden">Only <span id="maxStock" data-max-stock>0</span> left in stock
                         </div>
                     </div>
 
                     <!-- Add to Cart Button -->
                     <div class="add-to-cart-section">
-                        <button id="addToCartBtn" class="btn btn-primary btn-lg w-full" disabled>
+                        <button id="addToCartBtn" data-add-to-cart class="btn btn-primary btn-lg w-full" disabled>
                             Add to Cart
                         </button>
                     </div>
@@ -110,7 +110,7 @@
                     <!-- Product Description -->
                     <div class="product-description">
                         <h3>Description</h3>
-                        <p id="productDescription">-</p>
+                        <p id="productDescription" data-product-description>-</p>
                     </div>
                 </div>
             </div>
@@ -119,7 +119,7 @@
         <!-- Related Products -->
         <section class="related-products">
             <h2>Related Products</h2>
-            <div class="related-grid" id="relatedProducts"></div>
+            <div class="related-grid" id="relatedProducts" data-related-products></div>
         </section>
     </div>
 </main>
