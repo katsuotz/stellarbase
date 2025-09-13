@@ -26,4 +26,28 @@
     align-items: center;
     gap: .5rem;
     z-index: 10;
+    cursor: pointer;
+}
+
+.cart-toggle > svg {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.cart-count {
+    background-color: var(--color-danger);
+    color: var(--color-white);
+    position: absolute;
+    right: 0;
+    top: 0;
+    min-width: 1.25rem;
+    height: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(50%, -5px);
+    font-size: var(--font-size-sm);
+    border-radius: 10px;
+    line-height: 1;
+    border: 1px solid var(--color-white);
 }

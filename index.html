@@ -16,10 +16,14 @@
     <div class="container">
         <div class="header-content">
             <h1 class="logo">Stellarbase Store</h1>
-            <button class="cart-toggle btn btn-outline" id="cartToggle">
-                <span id="cartIcon">🛒</span>
-                Cart (<span id="cartCount">0</span>)
-            </button>
+            <span role="button" class="cart-toggle" id="cartToggle">
+               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                   <circle cx="8" cy="21" r="1"/>
+                   <circle cx="19" cy="21" r="1"/>
+                   <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+               <span class="cart-count" id="cartCount">0</span>
+            </span>
         </div>
     </div>
 </header>
@@ -43,7 +47,8 @@
                 <!-- Product Image -->
                 <div class="product-image-section">
                     <div class="product-image-container">
-                        <img id="productImage" src="" alt="" class="product-image">
+                        <img id="productImage" src="https://placehold.co/400x400?text=Loading..." alt=""
+                             class="product-image">
                     </div>
                 </div>
 
@@ -53,7 +58,8 @@
                         <h1 id="productTitle" class="product-title"></h1>
                         <div class="product-rating">
                             <div class="stars">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                     aria-hidden="true" data-slot="icon">
                                     <path fill-rule="evenodd"
                                           d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z"
                                           clip-rule="evenodd"></path>
@@ -164,6 +170,40 @@
         </div>
     </div>
 </footer>
+
+<!-- Cart Sidebar -->
+<div id="cartSidebar" class="cart-sidebar hidden">
+    <div class="cart-backdrop" id="cartBackdrop"></div>
+    <div class="cart-content">
+        <div class="cart-header">
+            <h2>Shopping Cart</h2>
+            <button id="closeCart" class="close-btn" aria-label="Close cart">×</button>
+        </div>
+
+        <div class="cart-body">
+            <div id="cartItems" class="cart-items">
+                <!-- Cart items will be inserted here -->
+            </div>
+
+            <div id="emptyCart" class="empty-cart">
+                <p>Your cart is empty</p>
+                <p class="empty-cart-subtitle">Add some items to get started</p>
+            </div>
+        </div>
+
+        <div class="cart-footer">
+            <div class="cart-total">
+                <div class="total-row">
+                    <span>Total:</span>
+                    <span id="cartTotal" class="total-amount">$0.00</span>
+                </div>
+            </div>
+            <button id="checkoutBtn" class="btn btn-primary btn-lg w-full">
+                Proceed to Checkout
+            </button>
+        </div>
+    </div>
+</div>
 
 <script src="app.js"></script>
 </body>
