@@ -12,6 +12,7 @@ const elements = {
   salePrice: document.getElementById('salePrice'),
   originalPrice: document.getElementById('originalPrice'),
   stockStatus: document.getElementById('stockStatus'),
+  variantLabel: document.getElementById('variantLabel'),
   variantSelect: document.getElementById('variantSelect'),
   quantityInput: document.getElementById('quantityInput'),
   quantityMinus: document.getElementById('quantityMinus'),
@@ -29,6 +30,7 @@ const elements = {
   emptyCart: document.getElementById('emptyCart'),
   cartTotal: document.getElementById('cartTotal'),
   checkoutBtn: document.getElementById('checkoutBtn'),
+  relatedProducts: document.getElementById('relatedProducts'),
 }
 
 const formatPrice = (price) => {
@@ -50,6 +52,8 @@ const renderProduct = () => {
     breadcrumbProduct.textContent = selectedProduct?.title || 'Product name unavailable';
   }
   elements.reviewCount.textContent = `(${selectedProduct?.reviews || 0} reviews)`
+  elements.quantityInput.value = 1
+  renderRelatedProducts()
 }
 
 const renderPrice = () => {
@@ -65,16 +69,36 @@ const renderPrice = () => {
 
 const renderVariant = () => {
   selectedVariant = undefined
-  elements.variantSelect.innerHTML = '<option value="">Select size</option>'
+  elements.variantLabel.textContent = selectedProduct.variantLabel
+  elements.variantSelect.innerHTML = `<option value="">Select ${selectedProduct.variantLabel.toLowerCase()}</option>`
   elements.addToCartBtn.disabled = true
 
   selectedProduct?.variants.forEach((variant) => {
     const option = document.createElement('option')
     option.value = variant.id
-    option.textContent = `${variant.size} ${variant.stock === 0 ? '(Out of Stock)' : ''}`
+    option.textContent = `${variant.name} ${variant.stock === 0 ? '(Out of Stock)' : ''}`
     option.disabled = variant.stock === 0
     elements.variantSelect.appendChild(option)
   })
+}
+
+const renderRelatedProducts = () => {
+  elements.relatedProducts.innerHTML = relatedProducts.map(product => `
+    <div class="related-item card" onclick="selectProduct(${product.id})">
+      <img src="${product.image || 'https://placehold.co/400x400?text=No Image'}" alt="" class="related-image">
+      <div class="card-body flex justify-between items-center">
+        <div>
+          <h4>${product.title}</h4>
+          <p>$24.99</p>
+        </div>
+        <div class="stars">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+             <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd"></path>
+          </svg>
+          <span class="rating-count">${product.rating}</span>
+        </div>
+      </div>
+    </div>`).join('')
 }
 
 const handleVariantSelect = (e) => {
@@ -90,7 +114,7 @@ const handleVariantSelect = (e) => {
     elements.originalPrice.textContent = `$${selectedVariant?.originalPrice || 0}`
     elements.originalPrice.classList.remove('hidden')
   } else {
-    elements.salePrice.textContent = `$${selectedVariant?.originalPrice || 0}`
+    elements.salePrice.textContent = `$${selectedVariant?.price || 0}`
     elements.originalPrice.classList.add('hidden')
   }
 
@@ -173,7 +197,8 @@ const addToCart = () => {
       productId: selectedProduct.id,
       variantId: selectedVariant.id,
       title: selectedProduct.title,
-      variant: selectedVariant.size,
+      variantLabel: selectedProduct.variantLabel,
+      variant: selectedVariant.name,
       price: selectedVariant.price,
       quantity: qty,
       totalPrice: selectedVariant.price * qty,
@@ -210,7 +235,7 @@ const updateCartDisplay = () => {
 
   elements.cartItems.innerHTML = cart.map((item, index) => `
     <div class="cart-item">
-      <img src="${item.image}" alt="${item.title}" class="cart-item-image">
+      <img src="${item.image || 'https://placehold.co/400x400?text=No Image'}" alt="${item.title}" class="cart-item-image">
       <div class="cart-item-details">
         <div class="flex">
           <h4 class="cart-item-title">${item.title}</h4>
@@ -218,7 +243,7 @@ const updateCartDisplay = () => {
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
           </span>
         </div>
-        <div class="cart-item-variant">Size: ${item.variant}</div>
+        <div class="cart-item-variant">${item.variantLabel}: ${item.variant}</div>
         <div class="cart-item-price-row">
           <span class="cart-item-quantity">Qty: ${item.quantity}</span>
           <span class="cart-item-price">${formatPrice(item.totalPrice)}</span>
@@ -245,10 +270,10 @@ elements.cartToggle.addEventListener('click', toggleCart)
 elements.closeCart.addEventListener('click', toggleCart)
 elements.addToCartBtn.addEventListener('click', addToCart)
 
-const selectProduct = (idx) => {
-  selectedProduct = products[idx]
+const selectProduct = (id) => {
+  selectedProduct = products.find(e => e.id === id)
+  relatedProducts = products.filter(e => e.id !== id)
   renderProduct()
-  relatedProducts = products.filter(e => e.id !== selectedProduct.id)
 }
 
 const fetchData = () => {
@@ -262,7 +287,7 @@ const fetchData = () => {
     .then(data => {
       products = data.products
       if (products.length) {
-        selectProduct(0)
+        selectProduct(products[0].id)
       }
     })
     .catch(error => {

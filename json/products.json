@@ -10,10 +10,11 @@
       "basePrice": 29.99,
       "isOnSale": true,
       "salePrice": 19.99,
+      "variantLabel": "Size",
       "variants": [
         {
           "id": "tshirt-s",
-          "size": "S",
+          "name": "S",
           "price": 19.99,
           "originalPrice": 29.99,
           "stock": 15,
@@ -21,7 +22,7 @@
         },
         {
           "id": "tshirt-m",
-          "size": "M",
+          "name": "M",
           "price": 20.99,
           "originalPrice": 29.99,
           "stock": 8,
@@ -29,7 +30,7 @@
         },
         {
           "id": "tshirt-l",
-          "size": "L",
+          "name": "L",
           "price": 21.99,
           "originalPrice": 32.99,
           "stock": 3,
@@ -37,7 +38,7 @@
         },
         {
           "id": "tshirt-xl",
-          "size": "XL",
+          "name": "XL",
           "price": 22.99,
           "originalPrice": 32.99,
           "stock": 0,
@@ -54,31 +55,32 @@
       "reviews": 89,
       "basePrice": 79.99,
       "isOnSale": false,
+      "variantLabel": "Size",
       "variants": [
         {
           "id": "jeans-28",
-          "size": "28",
+          "name": "28",
           "price": 79.99,
           "stock": 12,
           "sku": "JNS-002-28"
         },
         {
           "id": "jeans-30",
-          "size": "30",
+          "name": "30",
           "price": 79.99,
           "stock": 18,
           "sku": "JNS-002-30"
         },
         {
           "id": "jeans-32",
-          "size": "32",
+          "name": "32",
           "price": 79.99,
           "stock": 6,
           "sku": "JNS-002-32"
         },
         {
           "id": "jeans-34",
-          "size": "34",
+          "name": "34",
           "price": 79.99,
           "stock": 9,
           "sku": "JNS-002-34"
@@ -95,10 +97,11 @@
       "basePrice": 199.99,
       "isOnSale": true,
       "salePrice": 149.99,
+      "variantLabel": "Color",
       "variants": [
         {
           "id": "headphones-black",
-          "size": "Black",
+          "name": "Black",
           "price": 149.99,
           "originalPrice": 199.99,
           "stock": 25,
@@ -106,7 +109,7 @@
         },
         {
           "id": "headphones-white",
-          "size": "White",
+          "name": "White",
           "price": 149.99,
           "originalPrice": 199.99,
           "stock": 14,
@@ -114,7 +117,7 @@
         },
         {
           "id": "headphones-blue",
-          "size": "Blue",
+          "name": "Blue",
           "price": 159.99,
           "originalPrice": 209.99,
           "stock": 0,
@@ -131,17 +134,18 @@
       "reviews": 67,
       "basePrice": 49.99,
       "isOnSale": false,
+      "variantLabel": "Color",
       "variants": [
         {
           "id": "wallet-brown",
-          "size": "Brown",
+          "name": "Brown",
           "price": 49.99,
           "stock": 20,
           "sku": "WLT-004-BRN"
         },
         {
           "id": "wallet-black",
-          "size": "Black",
+          "name": "Black",
           "price": 49.99,
           "stock": 10,
           "sku": "WLT-004-BLK"

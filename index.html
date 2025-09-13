@@ -79,7 +79,7 @@
 
                     <!-- Variant Selector -->
                     <div class="variant-section">
-                        <label for="variantSelect" class="form-label">Size:</label>
+                        <label for="variantSelect" class="form-label" id="variantLabel">Size:</label>
                         <select id="variantSelect" class="form-control">
                             <option value="">Select size</option>
                         </select>
@@ -119,38 +119,7 @@
         <!-- Related Products -->
         <section class="related-products">
             <h2>Related Products</h2>
-            <div class="related-grid">
-                <div class="related-item card">
-                    <div class="related-image">
-                        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab" alt=""
-                             class="product-image">
-                    </div>
-                    <div class="card-body">
-                        <h4>Summer Collection Shirt</h4>
-                        <p>$24.99</p>
-                    </div>
-                </div>
-                <div class="related-item card">
-                    <div class="related-image">
-                        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab" alt=""
-                             class="product-image">
-                    </div>
-                    <div class="card-body">
-                        <h4>Casual Shorts</h4>
-                        <p>$18.99</p>
-                    </div>
-                </div>
-                <div class="related-item card">
-                    <div class="related-image">
-                        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab" alt=""
-                             class="product-image">
-                    </div>
-                    <div class="card-body">
-                        <h4>Athletic Wear</h4>
-                        <p>$34.99</p>
-                    </div>
-                </div>
-            </div>
+            <div class="related-grid" id="relatedProducts"></div>
         </section>
     </div>
 </main>
