@@ -1,15 +1,13 @@
 import { formatPrice } from '../utils/formatters.js'
 
-export class CartManager {
-  constructor(container, selectors = {}) {
-    this.container = typeof container === 'string' ? document.querySelector(container) : container
-    this.selectors = {
-      cartToggle: '[data-cart-toggle]',
-      cartCount: '[data-cart-count]',
-      ...selectors
-    }
+export class CartElement extends HTMLElement {
+  constructor() {
+    super()
     this.cart = []
     this.instanceId = Math.random().toString(36).substr(2, 9)
+  }
+
+  connectedCallback() {
     this.loadCartFromStorage()
     this.createCartSidebar()
     this.elements = this.getElements()
@@ -18,59 +16,50 @@ export class CartManager {
   }
 
   createCartSidebar() {
-    const cartSidebarHTML = `
-      <div id="cartSidebar-${this.instanceId}" data-cart-sidebar class="cart-sidebar hidden">
-        <div class="cart-backdrop" data-cart-backdrop></div>
-        <div class="cart-content">
-          <div class="cart-header">
-            <h2>Shopping Cart</h2>
-            <button data-cart-close class="close-btn" aria-label="Close cart">×</button>
+    this.innerHTML = `
+      <div class="cart-backdrop" data-cart-backdrop></div>
+      <div class="cart-content">
+        <div class="cart-header">
+          <h2>Shopping Cart</h2>
+          <button data-cart-close class="close-btn" aria-label="Close cart">×</button>
+        </div>
+
+        <div class="cart-body">
+          <div data-cart-items class="cart-items"></div>
+
+          <div data-cart-empty class="empty-cart">
+            <p>Your cart is empty</p>
+            <p class="empty-cart-subtitle">Add some items to get started</p>
           </div>
+        </div>
 
-          <div class="cart-body">
-            <div data-cart-items class="cart-items"></div>
-
-            <div data-cart-empty class="empty-cart">
-              <p>Your cart is empty</p>
-              <p class="empty-cart-subtitle">Add some items to get started</p>
+        <div class="cart-footer">
+          <div class="cart-total">
+            <div class="total-row">
+              <span>Total:</span>
+              <span data-cart-total class="total-amount">$0.00</span>
             </div>
           </div>
-
-          <div class="cart-footer">
-            <div class="cart-total">
-              <div class="total-row">
-                <span>Total:</span>
-                <span data-cart-total class="total-amount">$0.00</span>
-              </div>
-            </div>
-            <button data-checkout-btn class="btn btn-primary btn-lg w-full">
-              Proceed to Checkout
-            </button>
-          </div>
+          <button data-checkout-btn class="btn btn-primary btn-lg w-full">
+            Proceed to Checkout
+          </button>
         </div>
       </div>
     `
-
-    document.body.insertAdjacentHTML('beforeend', cartSidebarHTML)
+    this.classList.add('cart-sidebar', 'hidden')
   }
 
   getElements() {
-    const findElement = (selector) => {
-      return this.container.querySelector(selector) || document.querySelector(selector)
-    }
-
-    const cartSidebar = document.getElementById(`cartSidebar-${this.instanceId}`)
-
     return {
-      cartToggle: findElement(this.selectors.cartToggle),
-      closeCart: cartSidebar.querySelector('[data-cart-close]'),
-      cartSidebar: cartSidebar,
-      cartCount: findElement(this.selectors.cartCount),
-      cartItems: cartSidebar.querySelector('[data-cart-items]'),
-      emptyCart: cartSidebar.querySelector('[data-cart-empty]'),
-      cartTotal: cartSidebar.querySelector('[data-cart-total]'),
-      checkoutBtn: cartSidebar.querySelector('[data-checkout-btn]'),
-      cartBackdrop: cartSidebar.querySelector('[data-cart-backdrop]')
+      cartToggle: document.querySelector('[data-cart-toggle]'),
+      closeCart: this.querySelector('[data-cart-close]'),
+      cartSidebar: this,
+      cartCount: document.querySelector('[data-cart-count]'),
+      cartItems: this.querySelector('[data-cart-items]'),
+      emptyCart: this.querySelector('[data-cart-empty]'),
+      cartTotal: this.querySelector('[data-cart-total]'),
+      checkoutBtn: this.querySelector('[data-checkout-btn]'),
+      cartBackdrop: this.querySelector('[data-cart-backdrop]')
     }
   }
 
@@ -223,3 +212,5 @@ export class CartManager {
     return this.cart.reduce((sum, item) => sum + item.totalPrice, 0)
   }
 }
+
+customElements.define('cart-sidebar', CartElement)

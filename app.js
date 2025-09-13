@@ -1,5 +1,5 @@
 import { fetchProducts } from './js/services/api.js'
-import { CartManager } from './js/modules/cart.js'
+import './js/modules/cart.js'
 import { ProductManager } from './js/modules/product.js'
 import { RelatedProductsManager } from './js/modules/relatedProducts.js'
 
@@ -7,10 +7,8 @@ let cartManager, productManager, relatedProductsManager
 
 const initializeApp = async () => {
   try {
-    cartManager = new CartManager(document, {
-      cartToggle: '#cartToggle',
-      cartCount: '#cartCount'
-    })
+    const cartElement = document.querySelector('cart-sidebar')
+    window.cartElement = cartElement
 
     relatedProductsManager = new RelatedProductsManager(document, {
       relatedProducts: '#relatedProducts'
