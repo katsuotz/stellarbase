@@ -197,3 +197,38 @@
     object-fit: cover;
     display: block;
 }
+
+/* Responsive Design */
+@media (max-width: 1199px) {
+    .product-grid {
+        gap: 1.5rem;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .product-details-section {
+        gap: .75rem;
+    }
+
+    .product-image-section {
+        position: static;
+    }
+
+    .product-title {
+        font-size: var(--font-size-2xl);
+    }
+
+    .current-price {
+        font-size: var(--font-size-2xl);
+    }
+
+    .original-price {
+        font-size: var(--font-size-lg);
+    }
+}
