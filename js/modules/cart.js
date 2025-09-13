@@ -47,6 +47,7 @@ export class CartElement extends HTMLElement {
       </div>
     `
     this.classList.add('cart-sidebar', 'hidden')
+    this.id = this.instanceId
   }
 
   getElements() {

@@ -94,6 +94,7 @@ export class ProductElement extends HTMLElement {
         </div>
       </section>
     `
+    this.id = this.instanceId
   }
 
   setCartElement(cartElement) {
