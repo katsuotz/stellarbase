@@ -46,7 +46,7 @@
     align-items: center;
     justify-content: center;
     transform: translate(50%, -5px);
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
     border-radius: 10px;
     line-height: 1;
     border: 1px solid var(--color-white);
