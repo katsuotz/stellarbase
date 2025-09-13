@@ -20,30 +20,15 @@ select.form-control {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background-image: var(--select-caret-light);
+    background-image: var(--select-caret);
     background-repeat: no-repeat;
-    background-position: right var(--space-12) center;
+    background-position: right .75rem center;
     background-size: 16px;
-}
-
-/* Dark mode caret */
-@media (prefers-color-scheme: dark) {
-    select.form-control {
-        background-image: var(--select-caret-dark);
-    }
-}
-
-[data-color-scheme="dark"] select.form-control {
-    background-image: var(--select-caret-dark);
-}
-
-[data-color-scheme="light"] select.form-control {
-    background-image: var(--select-caret-light);
 }
 
 .form-control:focus {
     border-color: var(--color-primary);
-    outline: var(--focus-outline);
+    outline:  2px solid var(--color-primary);
     z-index: 2;
 }
 

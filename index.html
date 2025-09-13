@@ -15,7 +15,7 @@
     <div class="container">
         <div class="header-content">
             <h1 class="logo">Stellarbase Store</h1>
-            <button class="cart-toggle btn btn--outline" id="cartToggle">
+            <button class="cart-toggle btn btn-outline" id="cartToggle">
                 <span id="cartIcon">🛒</span>
                 Cart (<span id="cartCount">0</span>)
             </button>
@@ -79,16 +79,16 @@
                     <div class="quantity-section">
                         <label class="form-label">Quantity:</label>
                         <div class="quantity-controls">
-                            <button id="quantityMinus" class="quantity-btn btn btn--outline" type="button">−</button>
+                            <button id="quantityMinus" class="quantity-btn btn btn-outline" type="button">−</button>
                             <input id="quantityInput" type="number" value="1" min="1" class="quantity-input form-control" readonly>
-                            <button id="quantityPlus" class="quantity-btn btn btn--outline" type="button">+</button>
+                            <button id="quantityPlus" class="quantity-btn btn btn-outline" type="button">+</button>
                         </div>
                         <div id="stockLimit" class="stock-limit hidden">Only <span id="maxStock">0</span> left in stock</div>
                     </div>
 
                     <!-- Add to Cart Button -->
                     <div class="add-to-cart-section">
-                        <button id="addToCartBtn" class="btn btn-primary btn--lg btn--full-width" disabled>
+                        <button id="addToCartBtn" class="btn btn-primary btn-lg w-full" disabled>
                             <span id="buttonText">Select a size</span>
                         </button>
                     </div>
