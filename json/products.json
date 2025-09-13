@@ -1,0 +1,152 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "Premium Cotton T-Shirt",
+      "description": "Comfortable, high-quality cotton t-shirt perfect for everyday wear. Made from 100% organic cotton with a relaxed fit.",
+      "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab",
+      "rating": 4.5,
+      "reviews": 124,
+      "basePrice": 29.99,
+      "isOnSale": true,
+      "salePrice": 19.99,
+      "variants": [
+        {
+          "id": "tshirt-s",
+          "size": "S",
+          "price": 19.99,
+          "originalPrice": 29.99,
+          "stock": 15,
+          "sku": "TSH-001-S"
+        },
+        {
+          "id": "tshirt-m",
+          "size": "M",
+          "price": 20.99,
+          "originalPrice": 29.99,
+          "stock": 8,
+          "sku": "TSH-001-M"
+        },
+        {
+          "id": "tshirt-l",
+          "size": "L",
+          "price": 21.99,
+          "originalPrice": 32.99,
+          "stock": 3,
+          "sku": "TSH-001-L"
+        },
+        {
+          "id": "tshirt-xl",
+          "size": "XL",
+          "price": 22.99,
+          "originalPrice": 32.99,
+          "stock": 0,
+          "sku": "TSH-001-XL"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Classic Denim Jeans",
+      "description": "Timeless straight-leg jeans made from premium denim. Perfect fit with excellent durability.",
+      "image": "https://images.unsplash.com/photo-1602293589930-45aad59ba3ab",
+      "rating": 4.8,
+      "reviews": 89,
+      "basePrice": 79.99,
+      "isOnSale": false,
+      "variants": [
+        {
+          "id": "jeans-28",
+          "size": "28",
+          "price": 79.99,
+          "stock": 12,
+          "sku": "JNS-002-28"
+        },
+        {
+          "id": "jeans-30",
+          "size": "30",
+          "price": 79.99,
+          "stock": 18,
+          "sku": "JNS-002-30"
+        },
+        {
+          "id": "jeans-32",
+          "size": "32",
+          "price": 79.99,
+          "stock": 6,
+          "sku": "JNS-002-32"
+        },
+        {
+          "id": "jeans-34",
+          "size": "34",
+          "price": 79.99,
+          "stock": 9,
+          "sku": "JNS-002-34"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Wireless Headphones",
+      "description": "High-quality wireless headphones with noise cancellation and 30-hour battery life.",
+      "image": "https://images.unsplash.com/photo-1641048930621-ab5d225ae5b0",
+      "rating": 4.2,
+      "reviews": 256,
+      "basePrice": 199.99,
+      "isOnSale": true,
+      "salePrice": 149.99,
+      "variants": [
+        {
+          "id": "headphones-black",
+          "size": "Black",
+          "price": 149.99,
+          "originalPrice": 199.99,
+          "stock": 25,
+          "sku": "HDN-003-BLK"
+        },
+        {
+          "id": "headphones-white",
+          "size": "White",
+          "price": 149.99,
+          "originalPrice": 199.99,
+          "stock": 14,
+          "sku": "HDN-003-WHT"
+        },
+        {
+          "id": "headphones-blue",
+          "size": "Blue",
+          "price": 159.99,
+          "originalPrice": 209.99,
+          "stock": 0,
+          "sku": "HDN-003-BLU"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Leather Wallet",
+      "description": "Sleek and durable leather wallet with multiple card slots and a minimalist design.",
+      "image": "",
+      "rating": 4.7,
+      "reviews": 67,
+      "basePrice": 49.99,
+      "isOnSale": false,
+      "variants": [
+        {
+          "id": "wallet-brown",
+          "size": "Brown",
+          "price": 49.99,
+          "stock": 20,
+          "sku": "WLT-004-BRN"
+        },
+        {
+          "id": "wallet-black",
+          "size": "Black",
+          "price": 49.99,
+          "stock": 10,
+          "sku": "WLT-004-BLK"
+        }
+      ]
+    }
+  ]
+}

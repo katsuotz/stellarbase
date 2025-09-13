@@ -26,12 +26,16 @@ select.form-control {
     background-size: 16px;
 }
 
-.form-control:focus {
+.form-control:read-only {
+    outline: none;
+}
+
+.form-control:not(:read-only):focus {
     border-color: var(--color-primary);
     outline:  2px solid var(--color-primary);
     z-index: 2;
 }
 
-.form-control:hover {
+.form-control:not(:read-only):hover {
     border-color: var(--color-primary-hover);
 }

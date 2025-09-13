@@ -80,6 +80,15 @@
 .stars {
     color: #fbbf24;
     font-size: var(--font-size-lg);
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+    font-weight: 700;
+}
+
+.stars > svg {
+    width: 1.5rem;
+    height: 1.5rem;
 }
 
 .review-count {
@@ -165,6 +174,7 @@
 
 .stock-limit {
     font-size: var(--font-size-sm);
+    color: var(--color-danger);
     font-weight: 500;
 }
 

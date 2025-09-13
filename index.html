@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stellarbase</title><link rel="preconnect" href="https://fonts.googleapis.com">
+    <title>Stellarbase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles/main.css">
@@ -29,7 +30,7 @@
         <ol class="breadcrumb-list">
             <li><a href="#">Home</a></li>
             <li><a href="#">Products</a></li>
-            <li aria-current="page">Premium Cotton T-Shirt</li>
+            <li aria-current="page"></li>
         </ol>
     </div>
 </nav>
@@ -42,17 +43,22 @@
                 <!-- Product Image -->
                 <div class="product-image-section">
                     <div class="product-image-container">
-                        <img id="productImage" src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab" alt="" class="product-image">
+                        <img id="productImage" src="" alt="" class="product-image">
                     </div>
                 </div>
 
                 <!-- Product Details -->
                 <div class="product-details-section">
                     <div class="product-header">
-                        <h1 id="productTitle" class="product-title">Premium Cotton T-Shirt</h1>
+                        <h1 id="productTitle" class="product-title"></h1>
                         <div class="product-rating">
                             <div class="stars">
-                                <span class="stars-filled" id="starsDisplay">★★★★★</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                                    <path fill-rule="evenodd"
+                                          d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                                <span id="ratingCount" class="rating-count"></span>
                             </div>
                             <span id="reviewCount" class="review-count">(0 reviews)</span>
                         </div>
@@ -64,7 +70,6 @@
                             <span id="salePrice" class="current-price">$0.00</span>
                             <span id="originalPrice" class="original-price hidden">$0.00</span>
                         </div>
-                        <div id="stockStatus" class="stock-status">In Stock</div>
                     </div>
 
                     <!-- Variant Selector -->
@@ -79,24 +84,28 @@
                     <div class="quantity-section">
                         <label class="form-label">Quantity:</label>
                         <div class="quantity-controls">
-                            <button id="quantityMinus" class="quantity-btn btn btn-outline" type="button">−</button>
-                            <input id="quantityInput" type="number" value="1" min="1" class="quantity-input form-control" readonly>
-                            <button id="quantityPlus" class="quantity-btn btn btn-outline" type="button">+</button>
+                            <button id="quantityMinus" class="quantity-btn btn btn-outline" type="button" disabled>−
+                            </button>
+                            <input id="quantityInput" type="number" value="1" min="1"
+                                   class="quantity-input form-control" readonly>
+                            <button id="quantityPlus" class="quantity-btn btn btn-outline" type="button" disabled> +
+                            </button>
                         </div>
-                        <div id="stockLimit" class="stock-limit hidden">Only <span id="maxStock">0</span> left in stock</div>
+                        <div id="stockLimit" class="stock-limit hidden">Only <span id="maxStock">0</span> left in stock
+                        </div>
                     </div>
 
                     <!-- Add to Cart Button -->
                     <div class="add-to-cart-section">
                         <button id="addToCartBtn" class="btn btn-primary btn-lg w-full" disabled>
-                            <span id="buttonText">Select a size</span>
+                            <span id="buttonText">Add to Cart</span>
                         </button>
                     </div>
 
                     <!-- Product Description -->
                     <div class="product-description">
                         <h3>Description</h3>
-                        <p id="productDescription">Comfortable, high-quality cotton t-shirt perfect for everyday wear. Made from 100% organic cotton with a relaxed fit.</p>
+                        <p id="productDescription">-</p>
                     </div>
                 </div>
             </div>
@@ -108,7 +117,8 @@
             <div class="related-grid">
                 <div class="related-item card">
                     <div class="related-image">
-                        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab" alt="" class="product-image">
+                        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab" alt=""
+                             class="product-image">
                     </div>
                     <div class="card-body">
                         <h4>Summer Collection Shirt</h4>
@@ -117,7 +127,8 @@
                 </div>
                 <div class="related-item card">
                     <div class="related-image">
-                        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab" alt="" class="product-image">
+                        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab" alt=""
+                             class="product-image">
                     </div>
                     <div class="card-body">
                         <h4>Casual Shorts</h4>
@@ -126,7 +137,8 @@
                 </div>
                 <div class="related-item card">
                     <div class="related-image">
-                        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab" alt="" class="product-image">
+                        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab" alt=""
+                             class="product-image">
                     </div>
                     <div class="card-body">
                         <h4>Athletic Wear</h4>
