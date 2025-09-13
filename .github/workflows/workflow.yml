@@ -2,17 +2,21 @@ name: Deploy Stellarbase
 
 on:
   push:
-    branches: [ 'master' ]
-  workflow_dispatch: { }
+    branches: ['master']
+  workflow_dispatch: {}
 
 concurrency:
-  group: deploy-${{ github.ref }}
+  group: deploy-${{ github.ref_name }}
   cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: env
+    timeout-minutes: 15
 
     steps:
       - name: 🚀 SSH into server and deploy
@@ -24,15 +28,15 @@ jobs:
           port: ${{ secrets.SSH_PORT || 22 }}
           script_stop: true
           script: |
-            set -euo pipefail
-
             APP_DIR="/var/www/stellarbase"
             BRANCH="master"
 
             cd "$APP_DIR"
 
+            git config --global safe.directory "$APP_DIR"
+
             git fetch --all --prune
             git checkout "$BRANCH"
             git reset --hard "origin/$BRANCH"
-            
+
             sudo systemctl restart nginx
