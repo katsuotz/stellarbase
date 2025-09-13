@@ -98,6 +98,7 @@ export class ProductManager {
     
     this.renderPrice()
     this.renderVariant()
+    this.updateMetaTags()
     
     if (this.elements.ratingCount) {
       this.elements.ratingCount.textContent = this.selectedProduct?.rating
@@ -271,6 +272,37 @@ export class ProductManager {
 
   getQuantityValue() {
     return this.elements.quantityInput ? parseInt(this.elements.quantityInput.value) : 1
+  }
+
+  updateMetaTags() {
+    if (!this.selectedProduct) return
+
+    const title = `${this.selectedProduct.title} - Stellarbase Store`
+    const description = this.selectedProduct.description
+    const keywords = this.selectedProduct.tags ? this.selectedProduct.tags.join(', ') : ''
+    const image = this.selectedProduct.image || 'https://placehold.co/1200x630?text=Stellarbase+Store'
+
+    document.title = title
+    this.updateMetaTag('name', 'description', description)
+    this.updateMetaTag('name', 'keywords', keywords)
+    this.updateMetaTag('property', 'og:title', title)
+    this.updateMetaTag('property', 'og:description', description)
+    this.updateMetaTag('property', 'og:image', image)
+    this.updateMetaTag('name', 'twitter:title', title)
+    this.updateMetaTag('name', 'twitter:description', description)
+    this.updateMetaTag('name', 'twitter:image', image)
+  }
+
+  updateMetaTag(attribute, attributeValue, content) {
+    let metaTag = document.querySelector(`meta[${attribute}="${attributeValue}"]`)
+    if (metaTag) {
+      metaTag.setAttribute('content', content)
+    } else {
+      metaTag = document.createElement('meta')
+      metaTag.setAttribute(attribute, attributeValue)
+      metaTag.setAttribute('content', content)
+      document.head.appendChild(metaTag)
+    }
   }
 
   addToCart() {
